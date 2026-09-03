@@ -3,6 +3,14 @@
   height: 100%;
   object-fit: cover;
   object-position: center center;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  color: transparent;
+}
+
+.loaded {
+  opacity: 1;
   animation: glitch 0.3s ease;
 }
 

@@ -3,9 +3,8 @@ import styles from "./Layout.module.css";
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <div className={styles.mainContainer}>
-      <div className={styles.noise}></div>
+    <main className={styles.mainContainer} role="main">
       {children}
-    </div>
+    </main>
   );
 };

@@ -1,0 +1,7 @@
+# robots.txt for https://twitchhackoverlay.condorcoders.com/
+User-agent: *
+Allow: /
+Disallow: /overlay/
+
+# Sitemap
+Sitemap: https://twitchhackoverlay.condorcoders.com/sitemap.xml

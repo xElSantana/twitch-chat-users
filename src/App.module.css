@@ -1,44 +1,105 @@
-.title {
-  font-size: 3rem;
-  font-weight: bold;
-  font-style: italic;
-  margin-top: 1rem;
-}
 .description {
-  font-size: 1.5rem;
-  max-width: 80%;
-  padding: 1rem;
+  font-size: 1.1rem;
+  max-width: 90%;
+  padding: 0.25rem 0.5rem;
   text-align: center;
+  line-height: 1.35;
 }
+
+@media (min-width: 600px) {
+  .description {
+    font-size: 1.5rem;
+    max-width: 80%;
+    padding: 0.5rem;
+  }
+}
+
 .accent {
-  color: greenyellow;
+  color: #adff2f;
 }
+
+.form {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 360px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 600px) {
+  .form {
+    max-width: 420px;
+  }
+}
+
 .channelInput {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
-  border: 2px solid #fff;
+  border: 2px solid greenyellow;
   border-radius: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  font-family: "Comic Relief", cursive, sans-serif;
+  font-size: 1rem;
+  text-transform: lowercase;
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
+}
+
+.channelInput:focus {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+@media (min-width: 600px) {
+  .channelInput {
+    font-size: 1.2rem;
+    padding: 0.8rem 1rem;
+  }
 }
 
 .button {
-  padding: 0.5rem;
-  margin-left: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #000;
   border-radius: 0.5rem;
   background-color: greenyellow;
-  box-shadow: none;
-  text-transform: uppercase;
   font-weight: bold;
   color: #000;
   text-decoration: none;
-  font-family: monospace;
+  font-family: "Comic Relief", cursive, sans-serif;
   font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
 .button:hover {
-  cursor: pointer;
-  background-color: rgb(172, 200, 129);
+  background-color: #7fff00;
 }
-.computer.computer {
-  max-width: 400px;
+
+@media (min-width: 600px) {
+  .button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+.overlayPrompt {
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .overlayPrompt {
+    font-size: 1rem;
+  }
+}
+
+.computer {
+  max-width: 100%;
 }

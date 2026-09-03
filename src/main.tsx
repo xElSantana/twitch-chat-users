@@ -3,9 +3,6 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { TwitchComputer } from "./pages/TwitchComputer/TwitchComputer.tsx";
-import { Embed } from "./pages/Embed/Embed.tsx";
-import { Overlay } from "./pages/Overlay/Overlay.tsx";
 
 const router = createBrowserRouter([
   {
@@ -14,15 +11,26 @@ const router = createBrowserRouter([
   },
   {
     path: "/:channel",
-    element: <TwitchComputer />,
+    lazy: async () => {
+      const { TwitchComputer } = await import(
+        "./pages/TwitchComputer/TwitchComputer"
+      );
+      return { Component: TwitchComputer };
+    },
   },
   {
     path: "/overlay/:channel",
-    element: <Embed />,
+    lazy: async () => {
+      const { Embed } = await import("./pages/Embed/Embed");
+      return { Component: Embed };
+    },
   },
   {
     path: "/overlay-instructions",
-    element: <Overlay />,
+    lazy: async () => {
+      const { Overlay } = await import("./pages/Overlay/Overlay");
+      return { Component: Overlay };
+    },
   },
 ]);
 

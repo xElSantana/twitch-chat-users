@@ -16,56 +16,51 @@ export const useTwitchChat = (channel?: string) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeUser = users[activeIndex];
 
-  const chatClient = new ChatClient({
-    channels: channel ? [channel.toLowerCase()] : [],
-  });
-
   useEffect(() => {
+    if (!channel) return;
+
+    const chatClient = new ChatClient({
+      channels: [channel.toLowerCase()],
+    });
+
     chatClient.connect();
-    const connectChat = async () =>
-      chatClient.onMessage(async (_channel, _user, text, message) => {
-        const [command] = text.split(" ");
+    chatClient.onMessage(async (_channel, _user, text, message) => {
+      const [command] = text.split(" ");
 
-        if (command?.toLowerCase() === "!hack") {
-          const user = await apiClient.users.getUserById(
-            message.userInfo.userId
-          );
-          const profilePicture = user?.profilePictureUrl;
-          setUsers((prev) => {
-            const userExist = prev.find(
-              (user) => user.id === message.userInfo.userId
-            );
-            if (userExist) return prev;
+      if (command?.toLowerCase() === "!hack") {
+        const user = await apiClient.users.getUserById(
+          message.userInfo.userId
+        );
+        const profilePicture = user?.profilePictureUrl;
 
-            return [
-              ...prev,
-              {
-                id: message.userInfo.userId,
-                username: message.userInfo.userName,
-                profilePicture,
-              },
-            ];
-          });
-        }
-      });
-
-    connectChat();
+        setUsers((prev) => {
+          if (prev.some((u) => u.id === message.userInfo.userId)) return prev;
+          return [
+            ...prev,
+            {
+              id: message.userInfo.userId,
+              username: message.userInfo.userName,
+              profilePicture,
+            },
+          ];
+        });
+      }
+    });
 
     return () => {
       chatClient.quit();
     };
-  }, []);
+  }, [channel]);
 
   useEffect(() => {
+    if (users.length <= 1) return;
+
     const interval = setInterval(() => {
-      setActiveIndex((prev) => {
-        if (prev >= users.length - 1) return 0;
-        return prev + 1;
-      });
+      setActiveIndex((prev) => (prev + 1) % users.length);
     }, 10000);
 
     return () => clearInterval(interval);
-  }, [activeIndex, users]);
+  }, [users.length]);
 
   return { activeUser };
 };

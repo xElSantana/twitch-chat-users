@@ -1,18 +1,51 @@
 .username {
-  padding: 1rem;
+  padding: 0.5rem;
   animation: pulse 0.8s alternate infinite ease-in-out;
 }
 
 .hack {
   font-size: 2rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 .channel {
   font-size: 3rem;
-  font-family: monospace;
+  font-family: "Comic Relief", cursive, sans-serif;
   font-weight: 700;
-  font-style: italic;
-  padding: 1rem;
+  padding: 0.5rem;
+}
+
+.backButton {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  box-sizing: border-box;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #666;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-family: "Comic Relief", cursive, sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.backButton:hover {
+  border-color: #aaa;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 600px) {
+  .backButton {
+    top: 1.5rem;
+    left: 1.5rem;
+  }
 }
 
 @keyframes pulse {

@@ -8,9 +8,8 @@ export const Embed = () => {
   const { activeUser } = useTwitchChat(channel);
 
   return (
-    <div className={styles.wrapper}>
+    <main className={styles.wrapper} role="main">
       <Computer user={activeUser} />
-      {/* <p className={styles.username}>Downloading {activeUser?.username} ...</p> */}
-    </div>
+    </main>
   );
 };

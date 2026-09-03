@@ -1,39 +1,260 @@
-.title {
-  font-size: 3rem;
-  font-weight: bold;
-  font-style: italic;
-  margin-top: 1rem;
-}
-.description {
-  font-size: 1.5rem;
-  max-width: 80%;
-  padding: 1rem;
+.wizardCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  gap: 0.8rem;
+  width: 100%;
+  max-width: 500px;
 }
+
+.title {
+  font-size: 2.2rem;
+}
+
+@media (min-width: 600px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+.stepper {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.stepDot {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 2px solid #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #888;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.stepDotActive {
+  border-color: greenyellow;
+  color: #000;
+  background-color: greenyellow;
+}
+
+.stepDotDone {
+  border-color: greenyellow;
+  color: greenyellow;
+  background-color: rgba(173, 255, 47, 0.15);
+}
+
+.stepText {
+  font-size: 1.1rem;
+  max-width: 90%;
+}
+
 .channelInput {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
-  border: 2px solid #fff;
+  border: 2px solid greenyellow;
   border-radius: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-family: "Comic Relief", cursive, sans-serif;
+  font-size: 1.1rem;
+  width: 100%;
+  max-width: 280px;
+  box-sizing: border-box;
+  text-transform: lowercase;
 }
-.sourceImage {
-  max-width: 250px;
+
+.channelInput:focus {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.7);
 }
-.overlayImage {
-  max-width: 400px;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
 }
+
+.linkBox {
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid greenyellow;
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  word-break: break-all;
+  font-family: monospace;
+  font-size: 0.9rem;
+  max-width: 90%;
+  color: #fff;
+  user-select: all;
+}
+
+.imageTrigger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: zoom-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
+
+.instructionImage {
+  max-width: 90%;
+  max-height: 25vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.imageTrigger:hover .instructionImage,
+.imageTrigger:focus-visible .instructionImage {
+  transform: scale(1.02);
+}
+
+@media (min-height: 700px) {
+  .instructionImage {
+    max-height: 32vh;
+  }
+}
+
+.navButtons {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.navButtons .button {
+  flex: 1 1 130px;
+  max-width: 150px;
+}
+
 .button {
-  padding: 0.5rem;
-  margin-left: 0.5rem;
+  box-sizing: border-box;
+  min-width: 130px;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #000;
   border-radius: 0.5rem;
   background-color: greenyellow;
-  box-shadow: none;
-  text-transform: uppercase;
-  font-weight: bold;
+  color: #000;
+  font-family: "Comic Relief", cursive, sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .button:hover {
+  background-color: #7fff00;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #888;
+  border-color: #444;
+}
+
+.secondaryButton {
+  border-color: #666;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+.secondaryButton:hover {
+  border-color: #aaa;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.copyButton {
+  min-width: 170px;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1.5rem;
+  cursor: zoom-out;
+  animation: fadeIn 0.2s ease;
+}
+
+.modalContent {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.modalImage {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  animation: scaleIn 0.2s ease;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  background-color: rgb(172, 200, 129);
+  transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

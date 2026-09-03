@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Hacker, UserType } from "../Hacker/Hacker";
 import styles from "./Computer.module.css";
 
@@ -7,47 +8,34 @@ interface ComputerProps {
 }
 
 export const Computer = ({ user, className }: ComputerProps) => {
+  const [transitioning, setTransitioning] = useState(false);
+  const prevUserId = useRef<string | undefined>(undefined);
+
+  useEffect(() => {
+    const currentId = user?.id || user?.username;
+    if (currentId !== prevUserId.current) {
+      prevUserId.current = currentId;
+      setTransitioning(true);
+      const timer = setTimeout(() => setTransitioning(false), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [user]);
+
   return (
     <div className={`${styles.computer} ${className}`}>
-      <div className={styles.monitor}>
-        <div className={styles.inner_screen}>
-          <div className={styles.screen}>
-            {user && <Hacker {...user} />}
-            {!user && <div className={styles.noise} />}
-          </div>
-          <div className={styles.buttons}>
-            <div className={styles.button_top}></div>
-            <div className={styles.button_bottom}></div>
-            <div className={styles.button_bottom}></div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.cpu}>
-        <div className={styles.vent}>
-          <div className={styles.power_button}></div>
-          <div className={styles.vent_lines}>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-            <div className={styles.vent_line}></div>
-          </div>
-        </div>
-        <div className={styles.drives}>
-          <div className={styles.drive}></div>
-          <div className={styles.drive}></div>
-        </div>
+      <img
+        src="/static.png"
+        alt="Computer"
+        width={288}
+        height={288}
+        fetchPriority="high"
+        className={styles.staticImage}
+      />
+      <div className={styles.screenOverlay}>
+        {user && <Hacker key={user.id || user.username} {...user} />}
+        <div
+          className={`${styles.noise} ${transitioning ? styles.noiseTransition : ""}`}
+        />
       </div>
     </div>
   );
